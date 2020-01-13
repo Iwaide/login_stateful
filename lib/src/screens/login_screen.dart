@@ -34,6 +34,12 @@ class LoginScreenState extends State<LoginScreen> {
         hintText: 'you@example.com',
       ),
       keyboardType: TextInputType.emailAddress,
+      validator: (String value) {
+        if (!value.contains('@')) {
+          return 'Please enter a valid email';
+        }
+        return null;
+      },
     );
   }
 
@@ -44,12 +50,20 @@ class LoginScreenState extends State<LoginScreen> {
         labelText: 'Password',
         hintText: 'Password'
       ),
+      validator: (String value) {
+        if (value.length < 4) {
+          return 'Password must be at lease 4 characters';
+        }
+        return null;
+      }
     );
   }
 
   Widget submitButton() {
     return RaisedButton(
-      onPressed: () {},
+      onPressed: () {
+        formKey.currentState.validate();
+      },
       color: Colors.blue[300],
       child: Text('Submit'),
     );
