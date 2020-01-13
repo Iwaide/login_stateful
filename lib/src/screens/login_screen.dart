@@ -40,6 +40,9 @@ class LoginScreenState extends State<LoginScreen> {
         }
         return null;
       },
+      onSaved: (String value) {
+        print(value);
+      },
     );
   }
 
@@ -55,14 +58,19 @@ class LoginScreenState extends State<LoginScreen> {
           return 'Password must be at lease 4 characters';
         }
         return null;
-      }
+      },
+      onSaved: (String value) {
+        print(value);
+      },
     );
   }
 
   Widget submitButton() {
     return RaisedButton(
       onPressed: () {
-        formKey.currentState.validate();
+        if (formKey.currentState.validate()) {
+          formKey.currentState.save();
+        }
       },
       color: Colors.blue[300],
       child: Text('Submit'),
